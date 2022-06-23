@@ -1,6 +1,6 @@
 import './App.css';
 import { useState, useEffect } from 'react'
-/*
+
 const Person = (props) => {
   return (
     <>
@@ -10,8 +10,8 @@ const Person = (props) => {
     </>
   )
 }
-*/
 
+/*
 const App = () => {
   const [counter, setCounter] = useState(0);
 
@@ -27,5 +27,17 @@ const App = () => {
     </div>
   );
 }
+*/
 
+const App = () => {
+  return (
+    <div className='App'>
+        <Person />
+        <Person />
+        <Person />
+        <Person />
+        <Person />
+    </div>    
+);
+}
 export default App;
