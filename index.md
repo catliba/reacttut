@@ -61,7 +61,7 @@ To get started, use create-react-app command. (You need node.js installed) This 
     - like this, we can dynamically render larger blocks of code
 * Rule of React: when rendering two different elements, one adjacent of other, you need to wrap it in a React fragment
     - React fragments are like an empty div:
-    ``` JSX
+    ``` JavaScript
         <>  //these are the react fragments
         <h1> Test </h1>
         <h2> There is no test </h2>
@@ -72,7 +72,7 @@ To get started, use create-react-app command. (You need node.js installed) This 
 # Components
 We can create many components & import into larger components. Think of components like a function. \
 Example,\
-```JSX
+```JavaScript
     const Person = () => {
         return (
             <>
@@ -85,7 +85,7 @@ Example,\
 ```
 
 You can inject this into App in App.js with the following:
-```JSX
+```JavaScript
     const App = () => {
         return (
             <div className='App'>
@@ -98,7 +98,7 @@ You can inject this into App in App.js with the following:
 Doing so, it shows up on the webpage like so:\
 ![componentexample](images/componentexample.png)\
 Like functions, we can use it multiple times:\
-```JSX
+```JavaScript
     const App = () => {
         return (
             <div className='App'>
@@ -118,7 +118,7 @@ Outputs:\
 # Props
 #### Every component has built in `props` object
 Changing the code from before, we can use a placeholder instead of an actual name. So in the Person component we've created previously, \
-```JSX
+```JavaScript
     const Person = (props) => {
     return (
     <>
@@ -132,10 +132,86 @@ Changing the code from before, we can use a placeholder instead of an actual nam
 
 ![props](images/props.png)\
 To populate each reference, within the App component,
-```JSX
+```JavaScript
     <Person name={'John'} lastname={'Doe'} age={'30'}>
 ```
 Note that `{}` are not necessary unless you are passing in a dynamic expression such as `{2+2}` \
 Now we have duplicates, but different. Yay.
 
 # State `import { useState } from 'react'`
+#### State is a plain JS object used by React to represent a piece of information about the component's current situation. Completely managed by the component itself.
+Don't forget to first import State before using it\
+#### Whats the purpose of State?
+Let's first create a counter. \
+```JavaScript
+    const App = () => {
+        return (
+            <div className='App'>
+                <button>-</button>
+                <h1>0</h1>
+                <button>+</button>
+            </div>
+        );
+    }
+```
+![counteronwebpage](images/counteronwebpage.png) \
+Right now, if we click it nothing happens... \
+to make something happen, we have to implement State within the App component.
+```JavaScript
+    const [counter, setCounter]  = useState(0);
+```
+- Whenever you call something as a function and starts with use, that is called a ***hook*** in React
+- `[]` tells the name of the State. Rule of thumb, the second variable is the same as the first, but starts with set because it is a setter function for the first variable
+- Inside of the useState, you provide its initial value. In this case, it is zero.
+
+Let's reference it:
+```JavaScript
+    const App = () => {
+        return (
+            <div className='App'>
+                <button>-</button>
+                <h1>{counter}</h1>
+                <button>+</button>
+            </div>
+        );
+    }
+```
+
+Now we need to do an **event**. An **event** is an action triggered as a result of user action or system generated event (ie mouseclick).
+```JavaScript
+    <button onClick = { () => alert('clicked') }>-</button>
+```
+
+Every time you click the - button, an event will occur
+![clicked](images/clicked.png)
+- `alert('clicked')` is a callback function. No name, just waiting for a command.
+
+So we want make it decrease by 1 every click on the - button.
+```JavaScript
+    <button onClick = { () => setCounter((prevCount) => prevCount - 1) }>-</button>
+```
+- We used a callback function within a callback function
+- `prevCount` is a parameter for the current state. 
+
+#### State is just one of the many 'hooks' used by React, another is useEffect.
+
+# useEffect
+### does something on some effect or event
+```Javascript
+    useEffect( () => {alert('Reload')}); //happens as soon as event occurs
+```
+- What if we put `counter = 100` instead of `alert('Reload')`
+    - never modify state manually!
+    - counter is NOt a normal variable, it is part of React state, which can only be changed with its own settle functions
+    - use `setCounter(100)` instead. Sets the number counter to 100 at the start of each event.
+
+To make it only happen once: \
+```Javascript
+    useEffect( () => {alert('Reload')}, []); 
+```
+- `[]` is a dependency array, set to be empty
+    - Since it is empty, the value only gets set at the start because code is only going to happen at initial load of component.
+- If we were to put `[counter]`, then code will update everytime counter changes.
+    - pushing the button will cause an alert everytime \ 
+
+![usecountereffect](images/useEffectcounter.png)
