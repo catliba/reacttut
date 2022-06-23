@@ -14,15 +14,39 @@ React is a *component based* front end library
 - all parts of web app are divided into smaller components
 - each a small piece of the user interface
 
-Every react.js application is a tree of components:
-- independent and reuseable
-- combine it all to become a full fledged application
+* Every react.js application is a tree of components:
+    - independent and reuseable
+    - combine it all to become a full fledged application
 
 > for example, a website is split into smaller componenets
->> a sidebar
->> searchbar
->> movies
->>> movie name
->>> ratings
+> * sidebar
+> * searchbar
+> * movies
+>   - movie name
+>   - ratings
 > think of it like a tree
 
+## There are two types of components
+| Functional Components | Class-Based Components |
+| `import React from 'react'` | `import React { Component } from 'react'` |
+| used more frequently | outdated |
+
+Both returns something react should display, for example `<div>Hello, React!<div>`\
+This is *Stack Syntax* also known as JSX, which is used to describe what the user interface should look like.
+
+# Setting Up
+To get started, use create-react-app command. (You need node.js installed) This generates the files required to start React and run it in a browser, like a template.\
+> `npx create-react-app ./`
+> This installs the primary react packages
+
+> `npx start`
+> Runs the app on localhost3000
+
+## Other files and folders
+* *package.json* : all the dependencies & packages 
+* *node_modules* : where the npm packages are installed
+* *public* : one html file with an id of root. Everything is loaded onto that file
+* *src* : where all our logic is stored
+    * *index.html* : a single div with an id of root
+    * *index.js* : `react-dom` is used to reden out components & entire application into the real dom with a div with the id of `root`
+    * *App.js* : functional component in JSX.
